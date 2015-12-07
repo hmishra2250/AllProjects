@@ -1,0 +1,100 @@
+A
+B
+Player A: H3B
+Player B: B4B
+Player A: E2T
+Player B: C2L
+Player A: E2B
+Player B: A6L
+Player A: B2L
+Player B: D7B
+Player A: C1T
+Player B: A7R
+Player A: C6R
+Player B: B6L
+Player A: B4T
+Player B: H4R
+Player A: E8R
+Player B: C1B
+Player A: G8L
+Player B: C4L
+Player A: G5B
+Player B: D1L
+Player A: B1T
+Player B: B8R
+Player A: C3T
+Player B: E1L
+Player A: A3B
+Player B: H1L
+Player A: E8B
+Player B: C3R
+Player A: H5L
+Player B: A8L
+Player A: D5R
+Player B: G2B
+Player A: F3R
+Player B: B6R
+Player A: B8T
+Player B: A2L
+Player A: G7T
+Player B: C5B
+Player A: E3R
+Player B: D8B
+Player A: D7R
+Player B: A7T
+Player A: H2R
+Player B: D2R
+Player A: F5B
+Player B: E6T
+Player A: A6B
+Player B: A8R
+Player A: D4L C7R H6T
+Player B: E3T
+Player A: F6L
+Player B: A4T
+Player A: G8T
+Player B: D5L
+Player A: F1L
+Player B: H5T
+Player A: G7R
+Player B: D8L
+Player A: A4L
+Player B: F3T
+Player A: E8T
+Player B: D3T
+Player A: A1R
+Player B: G6T
+Player A: H7T
+Player B: G4R
+Player A: C7B
+Player B: G4B
+Player A: E3L D2L
+Player B: A1T D1T
+Player A: B6T
+Player B: F7R H7R G2R
+Player A: C3B F1T
+Player B: C5T E5R
+Player A: E4T
+Player B: A6T D6B
+Player A: H3L
+Player B: B2T G6B
+Player A: G1B
+Player B: H5B
+Player A: F5T
+Player B: F3B E6L A5L
+Player A: F1B
+Player B: C8T
+Player A: A4R G6R
+Player B: A7L C8B H3R
+Player A: F7T
+Player B: B1B
+Player A: A1B
+Player B: A3R
+Player A: B5R A1L G4L G6L F8T H5R F7B D2T B7T G8R A5R H1R
+Player B: E6B E7R B1R F1R C7L E4L
+Player A: D4T H1T E8L H6R H8T
+Player B: F4L F2R
+halt
+halt
+Score A: 42
+Score B: 22
