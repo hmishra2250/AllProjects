@@ -1,0 +1,24 @@
+Regression :
+predicting house rates based on Feateures such as size of house and rooms it has and recent purchase history in neighbourhood
+
+Graph of Square(X) feet vs Price(Y)
+Each point represents previous house sale in neighbourhood
+X axis termed as featuer;covariate:predictor:indep variable
+Y axis Observation :response
+
+Naive: Look at exact sizes as mine house's sales and estimate mine( Probability of finding ditto same size house ~ 0)
+So alternatively i would look at Range of square foot in graph ... but even with that approach, i would have very less observations in my range.. i.e i would through out other house data .. (Not good approach)
+
+Think about modelling the relationship between sq foot and price .. we will use somthing called reg
+
+WE want to understand the relationship ..simplest model  a line through the data
+Defined by intercept w0 and slope w1 : f(x)=w0+w1*x :::w1:weight of feature axis , its called the regression coeff :: interpretaion var of price on varying sq foot 
+write it as f subscript w /// and represents w being set of (w0,w1)
+**Each line is given by different set of parameters w(w0,w1) 
+To choose a line we define a cost function // we use RSS method Residual Sum of Squares 
+** We can also argue that higher order models will fit the data better, But those models are just linear model with some extra parameters, we can find the parameter set for them w~(hat) by iterating over different space of different parameters.
+Higher order model will fit the data better, but something seems fishy.
+**EVALUATING REG MODELS
+We can't predict the future, but we have to evaluate the model. To do so what we do is separate the data into training and test data from the same dataset.
+With training dataset, we train our model and get the parameters, with higher order model training error RSS error -> 0
+With test dataset, we evaluate out model on unknown data(what we were going to do is future seeing, it gives us the same power), With increasing model complexity, test error first decreases, reaches a minimum and then starts increasing with a very high rate
