@@ -1,1 +1,159 @@
 ##This is the notes for the course of Regression under ML Specialization by n\university of Washington
+**What is this course about
+#-1 What the course is about,previous background and blah blah ...
+**Simple Linear Regression
+
+#0 slides presented in module
+
+#1
+
+-Simple regression very simple form of regression where we have a single input we r trying to fit a line
+-We are gonna predict our house price based on data of other house sold and other attributes in the data
+
+#2
+
+-Regression Fundamentals:
+1.Data: For simple regression we record the size of the house and the price for which it is sold ( x input y - output, price of house). O/p y is the quantity of interest. 
+Plot price vs sqft grapoh, circle represents housei,pricei coordinate. Let the relationship is given by some function y = F(x). assuming the model is not 100% accurate,model representst our belief of relation (It may not be that way ) y-~=F(xi) : yi = F(xi) + Epsi (eror term), E(epsi) = 0 (Expected value of error = 0)
+E(epsi) = 0, which means it is equally likely that our error is positive or negative :: yi is equally likely to be above or below F(xi)
+No model is gonna be perfect, that is, represent actual complex info, but it may represent some useful abstraction between the data, that may be useful for many tasks such as price prediction. 
+
+#3
+
+Decide which model to use ( constant,linear ,quadratric ?)
+Assuming we have selected the model that we r gonna use (here F(X) is quadratric !). -> Next task is to estimate some specific fit from the data (different quadratric fits)
+
+#4
+
+We have training data (after some split in total data), here table of House sqft(x), actual sales prcie ( y ) ... 
+We r gonna extract some features from the total feature set (input for our regression model) - Here Sq.Ft
+Use ML model to predict sales price (predicted value -> y'), and we predict it by some estimated line or curve f' which is fit from our data set.
+Quality metric : Error in predicted values .. 
+ML algorithm tries to minimize the error by searchin over best model and producing the new model for next time !
+
+**Simple linear regression
+
+#1
+ML model: that takes input feature x and produce predicted value y', we have to fit a line over data ! F(x) = w0 + w1*x (intercept = w0 , slope = w1)
+Actual yi = F(xi)+Epsi (Epsi is the distance from our specific observatio to the line)
+Paramenteres are w0 and w1 and these are known as regression coefficients
+
+#2
+How we r gonna fit a line to data, Quality of fit .. the orange box in figure. Our function is parametrized on terms of w0 and w1 (W = w0,w1) these estimatef parameters fully determine estimatef function !
+Cost of line: Residual Sum of Squares RSS (Add up the erros between lines and actual observation)
+RSS(w0,w1) = Sum(y-(w0+w1*sqft))^2 for all sqft and y i.e all houses
+Given param, we can define the cost. Thus we can find the best line using the defined cost function, by finding the parameters that results in smallest residual sums ! We do this by iterating over all possible lines (basically parameters varying is equal to changing line )
+
+#3
+Interpret parameters
+The model we defined is in terms of the parameters (w0,w1) : y = w0+w1*x+epsi (w0,w1 are parameters that are unknown ):: and Our goal is to estimate these parameters, written as w0' and w1' (estimated parameters ... these take actual values) and we define our line based on these estimated parameters.
+We have to guess the price of a house adn we do it by plugging in the variables i.e y' = w0+w1*sqft
+We say that the predicted value is exactly equal to w0+w1*sqft ( Initially we had said that yi ~= F(xi) because of the error term but here we ignore that due to expected value =0 of error ) .. this is because the error is equally likely to be above and below the line .. so our best guess is to put it exactly on the line
+We can also predict the size of house that i can purchase, given the budget of amount, I have by inverse calculation from y to x.
+
+#4
+interpreting parameteres
+w0' = expected value of house with size = 0 sqft .. In general this is not that meaningfull
+w1' = for 1sqft, what's our predicted change in value of house i.e y(1001)-y(1000) = w1' (since change is 1 sqft.). The magnitude depends on both unit of input and unit of output (here $/sqft)
+
+**An Aside on optimization: 1d objectives
+
+#1
+Focusing on the ML algorithm, the dark grey square in flowchart, for searching over all the lines that best fit thte data.
+The 3-D model shows the function of RSS wrt w0 and w1 RSS = g(w0,w1) .. Objective to minimize function over all possible w0 and w1 ie w0' and w1' somehoe.
+This is optimization problem ,where the optimization is to minimize g(w0,w1) = Sum(yi-(w0+w1*x))^2 of two variabels
+ 
+#2
+Properties of minimum of function and its properties
+Notion of concave and convex .. to check this draw a line between any 2 points, if the line is below the curve, then concave else convex.
+Niether concave or convex : for any 2 points the line drawn is not completely above/below the curve, multiple solution to derivative = 0 OR no solution to derivative = 0
+concave : max : derivative = 0
+convex : min : derivative = 0, 
+
+#3
+A practical example on maxima and minima F(x) = 5- (w-10)^2 : F'(x) = -2(w-10) : since F'(x) = 0 => w = 10
+
+#4
+That was one way to find maxima/minima
+Hill Climbing Algorithm : Keep changing w, to get closer and closer to optimum . But how to know if to increase or decrease w to get more optimal answers.
+One way is using derivatives, if sign + then right else left ie decrease w. if derivative = 0, then stop
+Algo : while not converged : w(t+1) = w(t)+eta*dg(w)/dw ie driven by sign of derivative. ::eta is step size; t is iteration
+
+#5
+min via hill descent
+algorithm: w(t+1) = w(t) - eta*dg(w)/dw ie step towards minima and reach optimal point
+
+#6
+**Choosing the stepsize denoted by eta
+Fixed stepsize eg fixed eta of 0.5, constant stepsize may lead to going back and forth many times.
+We will need fixed stepsize most times, because we will deal with strongly convwx fn .. very well behaving convex function.
+Other option decrese step size as iteration goes on. stepsize also called as "schedule" thta u need to set.common choices nt = a/t OR nt = a/sqrt(t) :: Plot decreasing with t 
+#Note: Dont decrease step size too rapidly
+## Convergence criteria : dg(w)/dw = 0
+in practice stop when |dg(w)/dw|<epsilon (threshold to be set, generally very small)
+
+#7
+Multiple dimension : gradients
+We dont talk abot derivative, we talk about gradient grad[g(w)] , where grad = gradient function and w = [w0,w1,w2,....wp] :: grad[g(w)] = row of partial derivatives of g(w) wrt to each parameter wi ie [g'(w0) g'(w1).... g'(wp)]  * This is for p+1 dimensional vector
+eg g(w) = 5w0 + 10w0w1 + 2w1^2  :: grad[g(w)] = [5+10w1 10w0+4w1]
+
+#8
+Multidimensional hill descent
+Bird's eye view : transform 3-D to 2-D by seeing from top, each single curve in this graph represents constant RSS surface .. This is called contour plot
+Algorithm in 3-D :
+while not converged: w(t+1)<- w(t) - eta*grad[g(wt)] ** Direction of gradient in direction of steepest ascent
+##We are actually moving towards convergence ! in hyperdimensional space
+##Test for convergence : Magnitude of geadient vecto < epsilon then done else continue !
+
+**Finding the least squares line
+
+#1
+The objective is convex, ie solution to minimum is unique, The gradient descent algo will converge to this minimum.
+RSS(w0,w1) = SUM(yi-[w0+w1*xi])^2 :: gi(w) = (yi-[w0+w1*xi])^2
+deba(RSS)/deba(w0) = SUM(deba(gi(w))/deba(w0)) = SUM[ -2*(yi-[w0+w1*xi]) ] = -2 SUM(yi-[w0+w1*xi])
+deba(RSS)/deba(w1) = SUM( -2*(yi-[w0+w1*x])*xi) = -2*SUM(xi*(yi-[w0+w1*xi]))
+grad(RSS[w0,w1]) = [ -2*SUM(yi-[w0+w1*xi]) -2*SUM(xi*{yi-[w0+w1*xi]}) ] //Vector of two dimensions
+**We can apply the gradient descent algorithm ! But like in 1-D we did the derivative = 0 .. in Multidimension we can set grad = 0
+
+#2
+Approach 1: set gradient = 0 and solve for w0 and w1
+
+#3
+Approach 2 : Gradient descent
+rad(RSS[w0,w1]) = [ -2*SUM(yi-[w0+w1*xi]) -2*SUM(xi*{yi-[w0+w1*xi]}) ]  = [ -2SUM(yi-yi'(w0,w1)) -2SUM(xi*(yi-yi'(w0,w1)))]
+Algorithm : while not converged : [w0(t) w1(t)] +2*eta*[ SUM(yi-[w0+w1*xi]) SUM(xi*(yi-[w0+w1*xi]))] = [w0(t+1) w1(t+1)]  //-eta*-2 = 2*eta
+## If underpredicting yi' thren SUM(yi-yi') +ve, then w0 is going to increase ie we shift the line upwards to make it predict better .. Similar intuition for w1, but multiply by xi
+
+#4
+For most ML problem can't solve gradient = 0, so we turn to methods like gradient descent
+Even if solving it is feasible, then also gradient descent algorithm can be more efficient
+We had to choose a step size and convergence criteria .. thats the 
+
+**Discussion and summary of simple linear regression
+
+#0 Download data set and ipynb
+
+#1
+Influence of high leverage points
+Working on ipython notebook and exploring the dataset of philadelphia, in which average sales price of 98 towns and some other features are given.
+We find that a single observation very high crime rate, has not so low price, and our predicted line gets pulled towards it.
+
+#2
+Removing above observation, and doing it again
+High leverage points are the points which are the extremum, where there are no nearby observations. They have the potenyial to drastically change the least square line
+Influential Observations are those points whose removal significantly change the least square line, High leverage points are very good candidates for them !
+Inside randge points can also be leverage points, but the typical risk is very low when the observations are very dense ! But if the point is outlier, then the risk greatly increases due to its weight !
+
+#3
+Remove the high end points from the nocc data set and again fit the model on the same. Compare the results with previous models
+We see that the coefficients change by several hundred dollars ! But not by the amount as we saw in removing the leverage point of center city. This show that high leverage point can be much influential than outline observation within typical x range !
+## It is important to do data visualization on the data to know if there are high leverage points or outline points and whether or not they influence our model or not !
+
+#4
+Assymetric Errors
+RSS function is symmetric cost functuion cuz overestimate has the same cost as underestimating the output
+What if the cost of overestimating and underestimating are different ! Overestimate results in no offer , and underestimate results in offer but not good to me ! I may prefer to underestimate the value than over .. then the fit will be different !
+
+#5 Recap
+
+#6 Quiz
