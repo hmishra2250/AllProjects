@@ -63,7 +63,11 @@ alpha = 0.01;
 computeCost(X, y, theta)
 
 % run gradient descent
-theta = gradientDescent(X, y, theta, alpha, iterations);
+[theta,J_history,theta_h] = gradientDescent(X, y, theta, alpha, iterations);
+
+%plot J_history with iterations
+
+
 
 % print theta to screen
 fprintf('Theta found by gradient descent: ');
@@ -87,7 +91,7 @@ fprintf('Program paused. Press enter to continue.\n');
 pause;
 
 %% ============= Part 4: Visualizing J(theta_0, theta_1) =============
-fprintf('Visualizing J(theta_0, theta_1) ...\n')
+fprintf('Visualizing J(theta_0, theta_1) ...\n');
 
 % Grid over which we will calculate J
 theta0_vals = linspace(-10, 10, 100);
@@ -120,3 +124,6 @@ contour(theta0_vals, theta1_vals, J_vals, logspace(-2, 3, 20))
 xlabel('\theta_0'); ylabel('\theta_1');
 hold on;
 plot(theta(1), theta(2), 'rx', 'MarkerSize', 10, 'LineWidth', 2);
+
+figure;
+plot(1:iterations,J_history,'b','MarkerSize',10);
