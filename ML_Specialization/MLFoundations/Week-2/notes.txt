@@ -22,3 +22,4 @@ Higher order model will fit the data better, but something seems fishy.
 We can't predict the future, but we have to evaluate the model. To do so what we do is separate the data into training and test data from the same dataset.
 With training dataset, we train our model and get the parameters, with higher order model training error RSS error -> 0
 With test dataset, we evaluate out model on unknown data(what we were going to do is future seeing, it gives us the same power), With increasing model complexity, test error first decreases, reaches a minimum and then starts increasing with a very high rate
+
