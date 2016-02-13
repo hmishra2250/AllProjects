@@ -1,0 +1,5 @@
+Bias and variance are defined in 3 different ways, viz Conceptually, Graphically and Mathematically !
+
+Conceptual Defn: 
+Error due to bias is taken as  the difference between the expected (or average ??) prediction of our model and the correct value, that we are trying to predict . Expected value means that we are talking of many analysis, creating differenct models of different sets of models.
+bnz_cnb_sre_irctc

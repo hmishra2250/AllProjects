@@ -157,3 +157,68 @@ What if the cost of overestimating and underestimating are different ! Overestim
 #5 Recap
 
 #6 Quiz
+
+---------------------------Week 2-----------------------------
+
+** Multiple features of one input
+
+#0 Slides presented in the module
+
+#1 
+Multiple regression introduction. 
+Defn :: Multiple regression is single regression with multiple features, where each feature is some funtion of either single input or multiple unputs.
+
+#2
+Polynomial regression
+Simple linear regression model is really simple, and in lot of case we would be interested in  complex fn of input. One example of this is polynomail regression. eg quadratric fit : f(x) = w0+w1*x+w1*x^2 
+Model = yi = w0+w1xi+w2xi^2 ... wpxi^p + epsi ie pth order polynomial ... treat individual powers as individual features, and features are just some functions of our input .. total p+1 features 1st beign 1 .. corresponding parameters w0,w1...wp
+
+#3 
+Seasonality
+seasonality is the effect where with the course of time, there is some trend going on .. for example prices of house wrt month ... reaches max during summer and min during november :: We model such seasonality by adding seasonal component .. ie a sinusoidal wave with period 12.
+Model : yi = w0 + w1*x + w2*sin(2*pi/12 - phi) + epsi where phi represents the phase term  . Note that : this no longer represents a simple regresssion so we use a trick and break it as follows: 
+yi = ... + w2*sin(2*pi*t/12)+w3*cos(2*pi*t/12)
+
+#4
+Where we see seasonality
+##Weather .. temperature ! There are seasonality at different time scales . we might add sine and cosine functions at different frequencies to capture this diff time scales.
+##Flu monitoring :: depends on the time of year .. peaks during flu seasons and trough during normal month.
+##Demand forecasting : Like for amazon or e commerce websites.
+##Motion capture data
+
+#5
+Regression with general feature of 1 imput 
+We already talked about polynomial regression and seasonality. we can think of any function of single input. 
+Let us denote each features more generically by a function h ie our model becomes :: yi = w0h0(xi) + w1*h1(xi) ... wdhd(xi) + epsi.
+feature 1 :h0 : often 1
+feature 2 :h1 : eg x
+feature 3 :h2 : eg x^2 or sin(2*pi*x/12) ...
+feature D :hd : eg x^p
+## In the ML diagram, the Feature extracer takes input x and returns h(x) ie our features of input x
+
+** Incorporating multiple agents
+
+#1 
+We have used only one feature to predict the price of our house, which may seem good, but still lags somewhat behind ! We can argue that there is some house having more bathrooms should be rated higher than house having similar sqft, but lesser number of bathrooms. So we need to add more features!
+In higher dimension space, we model some function that models the rellationship between number of house and number of Bathrooms, and o/p viz. value of house. let it be : f(x) = w0 + w1*sqft + w2*bath . 
+Similarly we can use lots of input features. This is used in a lot of places, like Reading the mind (Predicting happy or sad with voxel data fmri )! 
+
+#2
+Defining Notations: output:y inputs,x = (x[1],x[2]...x[d])  ... x[j] = jth input (scalar) .. hj(x) = jth feature (feature may be functions of multiple inpputs !) ... xi = ith input, ith observation .. xi[j] = for ith house, jth input !	
+
+#3 
+For multiple inputs, simplest model is yi = wo + w1*xi[1] + w2*xi[2] ... wd*xi[d] + eps [Simplest model, with features being inputs i.e feature1 = 1, feature2 = x[1] .... featured+1 = x[d] ] .. Number of observations N, # of inputs d, # of features D 
+
+#4
+Interpreting the coefficients: remebering the interpretation of simple linear regression (y' = w0'+w1'*x) w0':intercept of line (value of house with sqft= 0) w1':predicted change in putput per unit change in input (here sqft)
+Two inputs : y' = w0'+w1'*x[1] + w2'*x[2] , here we fix one input, and then think of other features, it is equivalent to taking a slice of hyperplane: Now coeff of x[2] is  the slope of the line, that is thus formed : which represents change in cost wrt #bathrooms
+More general model with d input features y0' = w0' +w1'*x[1]+...wd'*x[d] : fix all the other features in the model, and then remaining coeff represents predicted change in the value of the house, if we change NOT fixed coefficient by unit amount !(here 1 bedroom )
+** If we have both sqft and #bedrooms, the coeff of #bedrooms may become negative, as more bedrooms => lesser preference ... but if at the same time we remove the sqft coeff and refit the model, we may find that now it has some +ve large number, because (in general) #bedrooms are indication of size of the house !
+**Imp** Dont just look at the coeff and make inference, think of the coeff in the context of what we have put in the model (example: If we have included sqft or not etc) !
+Interpretaion of coeff of polynomial regeression: **Here fixing 1 input, would fix everything !! Thus we can't think of interpreting the model as we did earlier with hyperplane !!!
+
+**Setting stage to calculate least squares
+
+#1 Reading:Matrix Algebra
+
+#2

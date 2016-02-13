@@ -9,3 +9,7 @@ image_train_data/
 *.zip
 *.gl/
 Other's-week-2-multiple-regression-assignment-2-blank.ipynb
+Pintos/
+*.gz
+notMNIST_large/
+notMNIST_small/
